@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	// "github.com/gin-contrib/static"
+
 )
 
 func main() {
@@ -17,10 +19,13 @@ func main() {
 	}
 
 	router.Use(cors.New(config))
-	//router.Use(static.Serve("/", static.LocalFile("./template", true)))
+	// router.Use(static.Serve("/", static.LocalFile("./template", true)))
 
 	router.Static("/static", "./")
-
+	
+	router.NoRoute(func(c *gin.Context) {
+		c.File("./template/index.html")
+	})
 	// Define a route and its handler function
 	router.GET("/listings", DirRequest)
 	
