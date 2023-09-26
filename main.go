@@ -19,7 +19,6 @@ func main() {
 	}
 
 	router.Use(cors.New(config))
-	// router.Use(static.Serve("/", static.LocalFile("./template", true)))
 
 	router.Static("/static", "./")
 	
